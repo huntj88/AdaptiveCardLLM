@@ -13,9 +13,8 @@ abstract class AbstractTextFormatter(private val regularExpression: Regex) {
 
         var result = input
         val matches = regularExpression.findAll(input)
-        
         for (match in matches) {
-            result = result.replace(match.value, internalFormat(lang, match))
+            result = result?.replace(match.value, internalFormat(lang, match))
         }
 
         return result
@@ -33,7 +32,7 @@ class DateFormatter : AbstractTextFormatter(
             return matches.value // Return original string if parsing fails
         }
 
-        val format = matches.groupValues[2].toLowerCase(Locale.getDefault()).takeIf { it.isNotEmpty() } ?: "compact"
+        val format = matches.groupValues[2].lowercase().takeIf { it.isNotEmpty() } ?: "compact"
 
         return if (format != "compact") {
             val dateFormat = DateFormat.getDateInstance(
