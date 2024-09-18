@@ -3,8 +3,6 @@ package com.microsoft.adaptivecard.core
 
 import kotlin.reflect.KClass
 
-
-Utility function for enum parsing
 inline fun <reified T : Enum<T>> parseHostConfigEnum(value: Any?, defaultValue: T): T {
     return when (value) {
         is String -> try {
