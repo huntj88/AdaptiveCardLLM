@@ -101,7 +101,7 @@ open class BaseTextDefinition {
     var size: TextSize = TextSize.Default
     var color: TextColor = TextColor.Default
     var isSubtle: Boolean = false
-    var weight: TextWeight = TextWeight.Default
+    open var weight: TextWeight = TextWeight.Default
 
     constructor()
 
@@ -149,7 +149,7 @@ public class TextStyleDefinition : BaseTextDefinition {
     }
 }
 
-class FactTextDefinition : BaseTextDefinition {
+open class FactTextDefinition : BaseTextDefinition {
     var wrap: Boolean = true
 
     constructor() : super()

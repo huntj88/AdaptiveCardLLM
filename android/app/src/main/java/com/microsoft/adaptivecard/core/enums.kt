@@ -1,13 +1,21 @@
 package com.microsoft.adaptivecard.core
 
+import com.squareup.moshi.Json
+
 // For ContainerStyle, we'll use a sealed class with object instances
-sealed class ContainerStyle(val value: String) {
-    object Default : ContainerStyle("default")
-    object Emphasis : ContainerStyle("emphasis")
-    object Accent : ContainerStyle("accent")
-    object Good : ContainerStyle("good")
-    object Attention : ContainerStyle("attention")
-    object Warning : ContainerStyle("warning")
+enum class ContainerStyle {
+    @Json(name = "default")
+    Default,
+    @Json(name = "emphasis")
+    Emphasis,
+    @Json(name = "accent")
+    Accent,
+    @Json(name = "good")
+    Good,
+    @Json(name = "attention")
+    Attention,
+    @Json(name = "warning")
+    Warning,
 }
 
 // For enums with string values, we'll use enum classes with custom string values
@@ -26,6 +34,11 @@ enum class ActionMode(val value: String) {
 enum class Size {
     Auto, Stretch, Small, Medium, Large
 }
+
+enum class BlockElementHeight {
+    Auto, Stretch
+}
+
 
 enum class ImageSize {
     Small, Medium, Large
@@ -99,8 +112,17 @@ enum class ActionIconPlacement {
     LeftOfTitle, AboveTitle
 }
 
-enum class InputTextStyle {
+enum class TextInputStyle {
     Text, Tel, Url, Email, Password
+}
+
+enum class ChoiceInputStyle {
+    @Json(name = "compact")
+    Compact,
+    @Json(name = "expanded")
+    Expanded,
+    @Json(name = "filtered")
+    Filtered
 }
 
 enum class ValidationPhase {
@@ -130,4 +152,8 @@ enum class HostWidth {
 
 enum class TargetWidthCondition {
     AtLeast, AtMost
+}
+
+enum class InputLabelPosition {
+    Inline, Above
 }
