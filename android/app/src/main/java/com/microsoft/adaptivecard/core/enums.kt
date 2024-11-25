@@ -6,14 +6,19 @@ import com.squareup.moshi.Json
 enum class ContainerStyle {
     @Json(name = "default")
     Default,
+
     @Json(name = "emphasis")
     Emphasis,
+
     @Json(name = "accent")
     Accent,
+
     @Json(name = "good")
     Good,
+
     @Json(name = "attention")
     Attention,
+
     @Json(name = "warning")
     Warning,
 }
@@ -76,6 +81,14 @@ enum class TextColor {
     Default, Dark, Light, Accent, Good, Warning, Attention
 }
 
+enum class FontSize {
+    Default,
+    Small,
+    Medium,
+    Large,
+    ExtraLarge
+}
+
 enum class HorizontalAlignment {
     Left, Center, Right
 }
@@ -119,8 +132,10 @@ enum class TextInputStyle {
 enum class ChoiceInputStyle {
     @Json(name = "compact")
     Compact,
+
     @Json(name = "expanded")
     Expanded,
+
     @Json(name = "filtered")
     Filtered
 }

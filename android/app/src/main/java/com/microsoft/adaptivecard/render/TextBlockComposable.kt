@@ -23,10 +23,10 @@ import com.microsoft.adaptivecard.core.Action
 import com.microsoft.adaptivecard.core.ActionSet
 import com.microsoft.adaptivecard.core.AdaptiveCard
 import com.microsoft.adaptivecard.core.CardElement
-import com.microsoft.adaptivecard.core.Column
 import com.microsoft.adaptivecard.core.ColumnSet
 import com.microsoft.adaptivecard.core.Container
 import com.microsoft.adaptivecard.core.FactSet
+import com.microsoft.adaptivecard.core.FontSize
 import com.microsoft.adaptivecard.core.HorizontalAlignment
 import com.microsoft.adaptivecard.core.Image
 import com.microsoft.adaptivecard.core.InputChoiceSet
@@ -53,7 +53,6 @@ fun factory(cardElement: CardElement) {
         is InputTime -> InputTimeComposable(cardElement)
         is InputToggle -> InputToggleComposable(cardElement)
     }
-
 }
 
 @Composable
@@ -87,10 +86,11 @@ fun TextBlockComposable(textBlock: TextBlock) {
         },
         modifier = Modifier.fillMaxWidth(),
         fontSize = when (textBlock.size) {
-            "Small" -> 12.sp
-            "Medium" -> 16.sp
-            "Large" -> 20.sp
-            else -> 14.sp
+            null, FontSize.Default -> 14.sp
+            FontSize.Small -> 12.sp
+            FontSize.Medium -> 16.sp
+            FontSize.Large -> 20.sp
+            FontSize.ExtraLarge -> 24.sp
         },
         fontWeight = when (textBlock.weight) {
             TextWeight.Bolder -> FontWeight.Bold

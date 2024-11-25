@@ -25,7 +25,7 @@ data class TextBlock(
     val horizontalAlignment: HorizontalAlignment? = null,  // Horizontal alignment (e.g., "Left", "Center", etc.)
     val isSubtle: Boolean? = null,               // Whether the text should appear subtle (faded) (true/false)
     val maxLines: Int? = null,                   // The maximum number of lines to display (if wrapping)
-    val size: String? = null,                    // The size of the text (e.g., "Small", "Medium", "Large", etc.)
+    val size: FontSize? = null,                    // The size of the text (e.g., "Small", "Medium", "Large", etc.)
     val weight: TextWeight? = null,              // The weight of the text (e.g., "Bolder", "Lighter", etc.)
     val wrap: Boolean? = null,                   // Whether text should wrap within the container (true/false)
     val style: TextBlockStyle? = null, // Optional: Controls how the TextBlock is displayed
@@ -66,7 +66,7 @@ data class Container(
     val minHeight: String? = null, // Optional: Minimum height of the container (e.g., "80px")
     val rtl: Boolean? = null, // Optional: Indicates whether content should be presented right-to-left (true) or left-to-right (false)
 
-    val fallback: Any? = null, // Can be an Element or FallbackOption
+//    val fallback: Any? = null, // Can be an Element or FallbackOption
     val height: String? = null, // Specifies the height (e.g., "100px", "auto")
     val separator: Boolean? = null, // Optional: Draw a separating line at the top of the element
     val spacing: String? = null, // Optional: Spacing between this element and the preceding element
@@ -86,7 +86,7 @@ data class ColumnSet(
     val minHeight: String? = null, // Optional minimum height
     val horizontalAlignment: HorizontalAlignment? = null, // Horizontal alignment: left, center, right
 
-    val fallback: Any? = null, // Can be an Element or FallbackOption
+//    val fallback: Any? = null, // Can be an Element or FallbackOption
     val height: String? = null, // Specifies the height (e.g., "100px", "auto")
     val separator: Boolean? = null, // Optional: Draw a separating line at the top of the element
     val spacing: String? = null, // Optional: Spacing between this element and the preceding element
@@ -102,7 +102,7 @@ data class Column(
     val items: List<CardElement> = emptyList(), // List of CardElements inside the column (e.g., TextBlock, Image, etc.)
     val backgroundImage: String? = null, // Optional: Background image URI (PNG, JPEG, GIF)
     val bleed: Boolean? = null, // Optional: Determines if the column should bleed through its parent’s padding
-    val fallback: Any? = null, // Optional: Describes what to do when an unknown item is encountered or when the requirements can't be met
+//    val fallback: Any? = null, // Optional: Describes what to do when an unknown item is encountered or when the requirements can't be met
     val minHeight: String? = null, // Optional: Specifies the minimum height of the column (e.g., "80px")
     val rtl: Boolean? = null, // Optional: When true, content in this column should be presented right-to-left
     val separator: Boolean? = null, // Optional: When true, draw a separating line between this column and the previous column
@@ -138,7 +138,7 @@ data class InputText(
     val labelPosition: String? = null, // Position of the label: 'inline' or 'above' (only supported in JavaScript SDK)
     val labelWidth: String? = null, // Width of the label, either in percentage or pixels (only supported in JavaScript SDK)
     val inputStyle: String? = null, // Style hint for the input field (like read-only until focused)
-    val fallback: Any? = null, // What to do when an unknown element or feature is encountered
+//    val fallback: Any? = null, // What to do when an unknown element or feature is encountered
     val height: String? = null, // Height of the element (e.g., "100px", "auto")
     val separator: Boolean? = null, // If true, draw a separating line at the top of the element
     val spacing: String? = null, // Amount of spacing between this element and the previous one
