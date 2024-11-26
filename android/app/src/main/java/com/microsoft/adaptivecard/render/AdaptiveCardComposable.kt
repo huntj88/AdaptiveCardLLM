@@ -209,8 +209,8 @@ fun InputChoiceSetComposable(inputChoiceSet: InputChoiceSet) {
 
 @Composable
 fun InputDateComposable(inputDate: InputDate) {
-    // Placeholder for date picker
-    Text(text = inputDate.placeholder)
+    // TODO: theme/styling
+    DatePickerFieldToModal(placeholder = inputDate.placeholder)
 }
 
 @Composable
