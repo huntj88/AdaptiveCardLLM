@@ -1,23 +1,41 @@
 package com.microsoft.adaptivecard.render
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toSize
 import coil3.compose.rememberAsyncImagePainter
 import com.microsoft.adaptivecard.core.Action
 import com.microsoft.adaptivecard.core.ActionSet
@@ -134,9 +152,11 @@ fun ColumnSetComposable(columnSet: ColumnSet) {
 
 @Composable
 fun InputTextComposable(inputText: InputText) {
+    val state = remember { mutableStateOf(TextFieldValue()) }
+
     TextField(
-        value = "",
-        onValueChange = {},
+        value = state.value,
+        onValueChange = { state.value = it },
         placeholder = { inputText.placeholder?.let { Text(it) } },
         modifier = Modifier.fillMaxWidth()
     )
@@ -144,15 +164,44 @@ fun InputTextComposable(inputText: InputText) {
 
 @Composable
 fun InputChoiceSetComposable(inputChoiceSet: InputChoiceSet) {
-    Column {
-        inputChoiceSet.placeholder?.let { Text(text = it) }
-        inputChoiceSet.choices?.forEach { choice ->
-            Row {
-                RadioButton(
-                    selected = false,
-                    onClick = {}
-                )
-                Text(text = choice.title)
+    var expanded by remember { mutableStateOf(true) }
+    var selectedText by remember { mutableStateOf("") }
+    var textFieldSize by remember { mutableStateOf(Size.Zero) }
+    val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
+
+    Box {
+        OutlinedTextField(
+            value = selectedText,
+            readOnly = true,
+            onValueChange = { selectedText = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .onGloballyPositioned { coordinates ->
+                    // This value is used to assign to
+                    // the DropDown the same width
+                    textFieldSize = coordinates.size.toSize()
+                },
+            label = {
+                // TODO: localization
+                Text("Choose an option")
+            },
+            trailingIcon = {
+                Icon(icon, "contentDescription",
+                    Modifier.clickable { expanded = !expanded })
+            }
+        )
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier
+                .width(with(LocalDensity.current) { textFieldSize.width.toDp() })
+        ) {
+            inputChoiceSet.choices?.forEach { choice ->
+                DropdownMenuItem(text = { Text(choice.title) }, onClick = {
+                    selectedText = choice.title
+                    expanded = false
+                })
             }
         }
     }
