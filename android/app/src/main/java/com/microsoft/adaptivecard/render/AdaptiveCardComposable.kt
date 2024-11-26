@@ -16,7 +16,6 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -170,7 +169,7 @@ fun InputChoiceSetComposable(inputChoiceSet: InputChoiceSet) {
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
 
     Box {
-        OutlinedTextField(
+        TextField(
             value = selectedText,
             readOnly = true,
             onValueChange = { selectedText = it },
@@ -181,10 +180,11 @@ fun InputChoiceSetComposable(inputChoiceSet: InputChoiceSet) {
                     // the DropDown the same width
                     textFieldSize = coordinates.size.toSize()
                 },
-            label = {
+            placeholder = {
                 // TODO: localization
                 Text("Choose an option")
             },
+
             trailingIcon = {
                 Icon(icon, "contentDescription",
                     Modifier.clickable { expanded = !expanded })
